@@ -19,14 +19,20 @@
 
 
 
+// 
+
 import Sequelize from 'sequelize';
 import dotenv from 'dotenv';
 dotenv.config();
 
 const db = new Sequelize(process.env.DATABASE_URL, {
-    host: 'wsjdhs.h.filess.io', // Obliga a Sequelize a apuntar aquí
-    port: 3307,                 // Obliga a usar el puerto correcto
-    dialect: 'mysql',           // Define explícitamente el dialecto
+    dialect: 'postgres', // <-- Cambiado a postgres
+    dialectOptions: {
+        ssl: {
+            require: true,
+            rejectUnauthorized: false // Requerido por Render para conexiones seguras
+        }
+    },
     define: {
         timestamps: false
     },
