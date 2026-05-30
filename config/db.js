@@ -10,8 +10,11 @@ const db = new Sequelize( process.env.DATABASE_URL, {
     pool: {
         max: 1,
         min: 0,
-        acquire: 30000,
+        acquire: 60000,
         idle: 10000
+    },
+    dialectOptions: {
+        connectTimeout: 60000 // Tiempo de espera de conexión a nivel driver de MySQL
     }
 });
 
